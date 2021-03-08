@@ -33,34 +33,37 @@ int main()
 	gets_s(word);
 
 	//definição da fila com 50 elementos do tipo char[50]
-	list lista[50];
-	lista->tam = 0;
+	char list[50][50];
 
 	//definição das variáveis de controle
 	int position = 0;
-	bool mutex_produtor = false;
+	int read = 0;
+	bool mutex_produtor = true;
 	bool mutex_consumidor = false;
 
 	/*
 	* Realiza o tratamento para as vogais acentuadas e para o ç
 	*/
 	std::string search = converteTabelaAscii(word);
+	
+	int numThreads = omp_get_max_threads();
 
 
+#pragma omp parallel num_threads(numThreads)
 	while (fscanf_s(fp, "%s", str, _countof(str)) != EOF)
 	{
-		product(lista, str, &position, &mutex_produtor);
+		//std::cout << mutex_consumidor << std::endl;
+		product(list, str, position, mutex_produtor, mutex_consumidor);
+		consume(list, read, &result, search, mutex_consumidor, mutex_produtor);
 		/*
 		* A função de contagem usa o resltado da função de normalização que recebe como
 		* parâmetro a palavra lida do arquivo de texto
 		*/
-		countWordInLine(normalizeWord(str), &result, search);
+		//countWordInLine(normalizeWord(str), &result, search);
 	}
 	/*
-	while (!list.empty())
-	{
-		std::cout << list.front() << std::endl;
-		list.pop();
+	for (int i = 0; i < TAM; i++) {
+		std::cout << list[i] << std::endl;
 	}*/
 	fclose(fp);
 	std::cout << std::endl;
