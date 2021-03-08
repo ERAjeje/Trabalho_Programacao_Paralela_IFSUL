@@ -22,7 +22,7 @@ int main()
 	using namespace std;
 
 	FILE* fp;
-	char arq[TAM];
+	char arq[TAM*2];
 	printf("Digite o caminho completo e o nome do arquivo onde deseja procurar a palavra (coloque a extensao do arquivo):\n");
 	gets_s(arq);
 	fopen_s(&fp, arq, "r");
@@ -33,7 +33,7 @@ int main()
 	gets_s(word);
 
 	//definição da fila com 50 elementos do tipo char[50]
-	char list[50][50];
+	char list[TAM][40];
 
 	//definição das variáveis de controle
 	int position = 0;
@@ -52,19 +52,12 @@ int main()
 #pragma omp parallel num_threads(numThreads)
 	while (fscanf_s(fp, "%s", str, _countof(str)) != EOF)
 	{
-		//std::cout << mutex_consumidor << std::endl;
+		//chama a função product da biblioteca produtor
 		product(list, str, position, mutex_produtor, mutex_consumidor);
+		//chama a função consume da biblioteca consumidor
 		consume(list, read, &result, search, mutex_consumidor, mutex_produtor);
-		/*
-		* A função de contagem usa o resltado da função de normalização que recebe como
-		* parâmetro a palavra lida do arquivo de texto
-		*/
-		//countWordInLine(normalizeWord(str), &result, search);
 	}
-	/*
-	for (int i = 0; i < TAM; i++) {
-		std::cout << list[i] << std::endl;
-	}*/
+
 	fclose(fp);
 	std::cout << std::endl;
 	std::cout << result << std::endl;
