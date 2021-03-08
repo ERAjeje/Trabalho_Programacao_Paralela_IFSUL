@@ -142,11 +142,12 @@
     <ClCompile Include="TrabalhoProgParalela.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="consumidor.h" />
     <ClInclude Include="fmanagelib.h" />
+    <ClInclude Include="produtor.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="file.txt" />
-    <Text Include="Texto.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

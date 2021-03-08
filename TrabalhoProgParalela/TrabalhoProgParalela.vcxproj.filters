@@ -23,12 +23,15 @@
     <ClInclude Include="fmanagelib.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
+    <ClInclude Include="produtor.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
+    <ClInclude Include="consumidor.h">
+      <Filter>Arquivos de Cabeçalho</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="file.txt">
-      <Filter>Arquivos de Recurso</Filter>
-    </Text>
-    <Text Include="Texto.txt">
       <Filter>Arquivos de Recurso</Filter>
     </Text>
   </ItemGroup>
